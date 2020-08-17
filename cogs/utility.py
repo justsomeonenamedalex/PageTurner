@@ -13,9 +13,8 @@ class Utility(commands.Cog):
         await ctx.send(f"Pong! `{round(self.client.latency * 1000)}ms`")
 
     @commands.command()
-    async def poll(self, ctx, title: str, *args):
+    async def poll(self, ctx, title: str, *options):
         """Creates a poll than can be voted upon with reactions"""
-        options = args
         emojis = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣"]
         lines = []
 
