@@ -7,6 +7,23 @@ import time
 import praw
 import asyncio
 from PIL import Image, ImageColor, ImageOps, ImageFilter, ImageDraw
+from io import BytesIO
+
+
+async def get_pfp(member: discord.Member):
+    """Gets the pfp of the user as a png"""
+    img = member.avatar_url_as(format="png")
+    img = await img.read()
+    return img
+
+
+async def send_image(image, ctx, filename="image.png"):
+    """Converts the pfp into a byte stream? I think? I know it turns it into something PIL can use"""
+    # This code was stolen from a friend
+    image_b = BytesIO()
+    image.save(image_b, format="png")
+    image_b.seek(0)
+    await ctx.send(file=discord.File(image_b, filename=filename))
 
 
 class Fun(commands.Cog):
