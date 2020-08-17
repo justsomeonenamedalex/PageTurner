@@ -34,6 +34,12 @@ class Utility(commands.Cog):
         for x, i in enumerate(options):
             await poll_message.add_reaction(emojis[x])
 
+    @commands.command(aliases=["git", "code"])
+    async def github(self, ctx):
+        """Links the github repo for the bot's code"""
+        await ctx.send("Here is the code for the bot:\nhttps://github.com/justsomeonenamedalex/PageTurner")
+
 
 def setup(client):
     client.add_cog(Utility(client))
+
