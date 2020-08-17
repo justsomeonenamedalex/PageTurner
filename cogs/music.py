@@ -13,7 +13,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def song(self, ctx, *, text):
-        """Gets the open spotify link for the first result of the given search"""
+        """Gets the open spotify link for the first song result of the given search"""
         links = self.spotify.search_songs(text)
 
         if links is None:
@@ -26,7 +26,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def album(self, ctx, *, text):
-        """Gets the open spotify link for the first result of the given search"""
+        """Gets the open spotify link for the first album result of the given search"""
         links = self.spotify.search_albums(text)
 
         if links is None:
@@ -39,7 +39,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def artist(self, ctx, *, text):
-        """Gets the open spotify link for the first result of the given search"""
+        """Gets the open spotify link for the first artist result of the given search"""
         links = self.spotify.search_artists(text)
 
         if links is None:

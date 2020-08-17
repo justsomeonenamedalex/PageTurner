@@ -18,7 +18,7 @@ class Fun(commands.Cog):
 
     @commands.command(aliases=["moonphase", "moon_phase"])
     async def moon(self, ctx):
-        """Gets current data on the moon"""
+        """Gets the current phase of the moon"""
         # This api is the most random thing i've found for this bot, so I wouldn't be surprised if it goes down
         # TODO: read up on how the api works and recreate it in python
         # https://github.com/FarmSense/Astro-Widget/blob/master/astro_widget.js
