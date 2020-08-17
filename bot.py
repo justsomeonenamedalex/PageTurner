@@ -18,7 +18,7 @@ client = Bot(
     command_prefix=config["prefix"],
     allowed_mentions=discord.AllowedMentions(everyone=False, roles=False, users=True),
     status=discord.Status.online,
-    activity=discord.Game("Vibing | .help")
+    activity=discord.Game(f"Vibing | {config['prefix']}help")
 )
 client.config = config
 
