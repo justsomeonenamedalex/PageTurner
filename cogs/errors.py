@@ -16,7 +16,7 @@ class Errors(commands.Cog):
         elif isinstance(error, commands.MissingPermissions):
             await ctx.send("You don't have permission to run that command")
 
-        elif isinstance(error, commands.MissingPermissions):
+        elif isinstance(error, commands.BotMissingPermissions):
             await ctx.send(f"The bot is missing the following permission:\n{error.missing_perms}")
 
         else:
