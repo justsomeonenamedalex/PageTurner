@@ -12,9 +12,9 @@ class Music(commands.Cog):
         self.spotipy_client = self.spotify.sp
 
     @commands.command()
-    async def song(self, ctx, *, text):
+    async def song(self, ctx, *, song_name):
         """Gets the open spotify link for the first song result of the given search"""
-        links = self.spotify.search_songs(text)
+        links = self.spotify.search_songs(song_name)
 
         if links is None:
             await ctx.send("Something went wrong, sorry")
@@ -25,9 +25,9 @@ class Music(commands.Cog):
             await ctx.send("Sorry, the song wasn't found")
 
     @commands.command()
-    async def album(self, ctx, *, text):
+    async def album(self, ctx, *, album_name):
         """Gets the open spotify link for the first album result of the given search"""
-        links = self.spotify.search_albums(text)
+        links = self.spotify.search_albums(album_name)
 
         if links is None:
             await ctx.send("Something went wrong, sorry")
@@ -38,9 +38,9 @@ class Music(commands.Cog):
             await ctx.send("Sorry, the album wasn't found")
 
     @commands.command()
-    async def artist(self, ctx, *, text):
+    async def artist(self, ctx, *, artist_name):
         """Gets the open spotify link for the first artist result of the given search"""
-        links = self.spotify.search_artists(text)
+        links = self.spotify.search_artists(artist_name)
 
         if links is None:
             await ctx.send("Something went wrong, sorry")
