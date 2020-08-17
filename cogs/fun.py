@@ -9,6 +9,7 @@ class Fun(commands.Cog):
 
     @commands.command(aliases=["poggers"])
     async def pog(self, ctx):
+        """Poggers!"""
         await ctx.send("poggers")
 
 
