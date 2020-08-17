@@ -6,6 +6,7 @@ import json
 import time
 import praw
 import asyncio
+from PIL import Image, ImageColor, ImageOps, ImageFilter, ImageDraw
 
 
 class Fun(commands.Cog):
@@ -54,6 +55,41 @@ class Fun(commands.Cog):
             await asyncio.sleep(0.01)
         e = discord.Embed(title="Writing prompt", description=post.title[4:], url=post.url)
         await ctx.send(embed=e)
+
+    @commands.command(aliases=["profile_picture"])
+    async def pfp(self, ctx, user: discord.Member = None):
+        """Gets the pfp of the user, or a specified user"""
+        if user is None:
+            user = ctx.author
+
+        # Send the image as an embed because links don't always expand
+        embed = discord.Embed(title=f"Profile picture of {user}")
+        embed.set_image(url=user.avatar_url)
+        await ctx.send(embed=embed)
+
+    @commands.command(alises=["pfp_bw"])
+    async def pfp_greyscale(self, ctx, user: discord.Member = None):
+        """Creates a greyscale version of the user's pfp"""
+        if user is None:
+            user = ctx.author
+
+        image = Image.open(BytesIO(await get_pfp(user)))
+
+        out = image.convert('L')
+        await send_image(out, ctx)
+
+    @commands.command()
+    async def pfp_invert(self, ctx, user: discord.Member = None):
+        """Invert's the colours of the user's pfp"""
+        if user is None:
+            user = ctx.author
+
+        image = Image.open(BytesIO(await get_pfp(user)))
+
+        image = image.convert('RGB')
+
+        out = ImageOps.invert(image)
+        await send_image(out, ctx)
 
 
 def setup(client):
