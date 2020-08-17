@@ -67,7 +67,7 @@ class Fun(commands.Cog):
 
         while True:
             post = reddit.subreddit("WritingPrompts").random()
-            if "prompt" in post.link_flair_text.lower():
+            if "prompt" in post.link_flair_text.lower() and not post.over_18 and post.score >= 20:
                 break
             await asyncio.sleep(0.01)
         e = discord.Embed(title="Writing prompt", description=post.title[4:], url=post.url)
