@@ -4,6 +4,8 @@ import math
 import requests
 import json
 import time
+import praw
+import asyncio
 
 
 class Fun(commands.Cog):
@@ -34,6 +36,24 @@ class Fun(commands.Cog):
             await ctx.send(f"The current phase of the moon is `{data['Phase']}`")
         else:
             await ctx.send("Page could not be found")
+
+    @commands.command(aliases=["wp", "prompt"])
+    async def writing_prompt(self, ctx):
+        """Gets a random prompt from r/WritingPrompts"""
+        reddit_username = self.config["reddit_username"]
+        # reddit_password = self.config["reddit_password"]
+        reddit_id = self.config["reddit_id"]
+        reddit_secret = self.config["reddit_secret"]
+
+        reddit = praw.Reddit(client_id=reddit_id, client_secret=reddit_secret, user_agent=reddit_username)
+
+        while True:
+            post = reddit.subreddit("WritingPrompts").random()
+            if "prompt" in post.link_flair_text.lower():
+                break
+            await asyncio.sleep(0.01)
+        e = discord.Embed(title="Writing prompt", description=post.title[4:], url=post.url)
+        await ctx.send(embed=e)
 
 
 def setup(client):
