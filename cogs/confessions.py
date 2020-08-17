@@ -20,6 +20,7 @@ class Confessions(commands.Cog):
 
     @commands.command()
     async def confess(self, ctx: commands.Context, *, text):
+        """When sent via dm, used to send an anonymous confession"""
         if not (isinstance(ctx.channel, discord.DMChannel)):
             return
         check_message = await ctx.send(
