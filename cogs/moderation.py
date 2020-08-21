@@ -15,6 +15,8 @@ class Moderation(commands.Cog):
         await member.remove_roles(unverified_role)
         await member.add_roles(member_role)
 
+        await ctx.send(f"{member.display_name} has been verified!")
+
         welcome_channel = ctx.guild.get_channel(self.config["welcome_channel"])
         message = f"Welcome {member.mention} to the server.\nMake sure to get some roles from <#743068757190115399> , <#744588765888118835> and <#743089463038836778> and introduce yourself in <#743088854004662342> ! "
 
