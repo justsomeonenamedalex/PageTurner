@@ -97,7 +97,7 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def pfp_invert(self, ctx, user: discord.Member = None):
-        """Invert's the colours of the user's pfp"""
+        """Inverts the colours of the user's pfp"""
         if user is None:
             user = ctx.author
 
