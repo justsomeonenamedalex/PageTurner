@@ -8,6 +8,7 @@ import praw
 import asyncio
 from PIL import Image, ImageColor, ImageOps, ImageFilter, ImageDraw
 from io import BytesIO
+from bs4 import BeautifulSoup
 
 
 async def get_pfp(member: discord.Member):
@@ -107,6 +108,30 @@ class Fun(commands.Cog):
 
         out = ImageOps.invert(image)
         await send_image(out, ctx)
+
+    @commands.command()
+    async def book(self, ctx, *, title):
+        """Get's the Z-library page for the given title"""
+        url = f"https://b-ok.cc/s/{title}"
+        html = requests.get(url).text
+        soup = BeautifulSoup(html, "html.parser")
+        results = soup.find_all("div", {"class": "resItemBox"})
+        first_result = results[0]
+
+        text_box = first_result.find("h3")
+
+        link = f"https://b-ok.cc/{text_box.find('a')['href']}"
+
+        book_title = text_box.text
+
+        authors = first_result.find("div", {"class": "authors"}).text
+
+        image_url = first_result.find("img", {"class": "cover"})["data-src"]
+
+        e = discord.Embed(title=book_title, description=authors, url=link)
+        e.set_image(url=image_url)
+
+        await ctx.send(embed=e)
 
 
 def setup(client):
