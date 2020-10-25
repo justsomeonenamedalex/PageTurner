@@ -22,7 +22,10 @@ class Confessions(commands.Cog):
         # Deletes messages in void-venting after 5 seconds
         if message.channel.id == 743096503333027861:
             await asyncio.sleep(5)
-            await message.delete()
+            try:
+                await message.delete()
+            except discord.NotFound:
+                pass
 
     @commands.command()
     async def confess(self, ctx: commands.Context, *, text):
