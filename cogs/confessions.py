@@ -17,6 +17,12 @@ class Confessions(commands.Cog):
     #
     #     if isinstance(message.channel, discord.DMChannel):
     #         await message.channel.send(message.content)
+    @commands.Cog.listener()
+    async def on_message(self, message: discord.Message):
+        # Deletes messages in void-venting after 5 seconds
+        if message.channel.id == 743096503333027861:
+            await asyncio.sleep(5)
+            await message.delete()
 
     @commands.command()
     async def confess(self, ctx: commands.Context, *, text):
